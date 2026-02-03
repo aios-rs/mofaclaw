@@ -56,6 +56,10 @@ bitflags = "2.6.0"
 indexmap = "2.6.0"
 blurhash = { version = "0.2.3", default-features = false }
 
+# LLM API dependencies
+eventsource-stream = "0.2"
+futures = "0.3"
+
 ## Dependencies for TSP support.
 ## Commit "f0bc4625dcd729e07e4a36257df2f1d94c81cef4" is the most recent one without the invalid change to pin serde to 1.0.219.
 ## See my issue here: <https://github.com/openwallet-foundation-labs/tsp/issues/237>.
@@ -68,6 +72,7 @@ aws-lc-rs = { version = "1.13", optional = true, features = ["prebuilt-nasm"] }
 percent-encoding = { version = "2.3", optional = true }
 ## The following reqwest features were taken from the tsp_sdk's `Cargo.toml` file.
 ## I'm not sure if all of them are actually needed.
+## Also adding "stream" feature for LLM API streaming support.
 reqwest = { version = "0.12", default-features = false, features = [
     "rustls-tls-native-roots",
     "json",
