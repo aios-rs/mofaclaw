@@ -18,6 +18,7 @@ live_design! {
     use crate::home::room_screen::RoomScreen;
     use crate::home::invite_screen::InviteScreen;
     use crate::home::space_lobby::SpaceLobbyScreen;
+    use crate::home::chat_assistant_screen::ChatAssistantScreen;
 
     pub MainDesktopUI = {{MainDesktopUI}} {
         dock = <Dock> {
@@ -59,6 +60,7 @@ live_design! {
             room_screen = <RoomScreen> {}
             invite_screen = <InviteScreen> {}
             space_lobby_screen = <SpaceLobbyScreen> {}
+            chat_assistant_screen = <ChatAssistantScreen> {}
         }
     }
 }

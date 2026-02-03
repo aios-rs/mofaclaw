@@ -17,6 +17,7 @@ live_design! {
     use crate::shared::room_filter_input_bar::RoomFilterInputBar;
     use crate::home::main_desktop_ui::MainDesktopUI;
     use crate::settings::settings_screen::SettingsScreen;
+    use crate::home::chat_assistant_screen::ChatAssistantScreen;
 
     // Defines the total height of the StackNavigationView's header.
     // This has to be set in multiple places because of how StackNavigation
@@ -144,6 +145,18 @@ live_design! {
                             add_room_screen = <AddRoomScreen> {}
                         }
                     }
+
+                    chat_page = <View> {
+                        width: Fill, height: Fill
+                        show_bg: true,
+                        draw_bg: {
+                            color: (COLOR_PRIMARY)
+                        }
+
+                        <CachedWidget> {
+                            chat_assistant_screen = <ChatAssistantScreen> {}
+                        }
+                    }
                 }
             }
 
@@ -194,6 +207,15 @@ live_design! {
 
                                     <CachedWidget> {
                                         add_room_screen = <AddRoomScreen> {}
+                                    }
+                                }
+
+                                chat_page = <View> {
+                                    width: Fill, height: Fill
+                                    padding: {top: 20}
+
+                                    <CachedWidget> {
+                                        chat_assistant_screen = <ChatAssistantScreen> {}
                                     }
                                 }
                             }
@@ -412,6 +434,15 @@ impl Widget for HomeScreen {
             let app_state = scope.data.get_mut::<AppState>().unwrap();
             for action in actions {
                 match action.downcast_ref() {
+                    Some(NavigationBarAction::GoToChat) => {
+                        if !matches!(app_state.selected_tab, SelectedTab::Chat) {
+                            self.previous_selection = app_state.selected_tab.clone();
+                            app_state.selected_tab = SelectedTab::Chat;
+                            cx.action(NavigationBarAction::TabSelected(app_state.selected_tab.clone()));
+                            self.update_active_page_from_selection(cx, app_state);
+                            self.view.redraw(cx);
+                        }
+                    }
                     Some(NavigationBarAction::GoToHome) => {
                         if !matches!(app_state.selected_tab, SelectedTab::Home) {
                             self.previous_selection = app_state.selected_tab.clone();
@@ -504,6 +535,7 @@ impl HomeScreen {
                 match app_state.selected_tab {
                     SelectedTab::Space { .. }
                     | SelectedTab::Home => id!(home_page),
+                    SelectedTab::Chat => id!(chat_page),
                     SelectedTab::Settings => id!(settings_page),
                     SelectedTab::AddRoom => id!(add_room_page),
                 },

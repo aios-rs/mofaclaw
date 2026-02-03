@@ -618,8 +618,7 @@ impl AppMain for App {
 
 impl App {
     fn update_login_visibility(&self, cx: &mut Cx) {
-        // let show_login = !self.app_state.logged_in;
-        let show_login = false;
+        let show_login = !self.app_state.logged_in;
         if !show_login {
             self.ui
                 .modal(ids!(login_screen_view.login_screen.login_status_modal))

@@ -116,7 +116,7 @@ live_design! {
                         width: 275, height: Fit
                         flow: Right, // do not wrap
                         padding: 10,
-                        empty_text: "User ID"
+                        empty_text: "@amosli:aios.pub"
                     }
 
                     password_input = <SimpleTextInput> {
@@ -135,7 +135,7 @@ live_design! {
                             width: 275, height: Fit,
                             flow: Right, // do not wrap
                             padding: {top: 5, bottom: 5, left: 10, right: 10}
-                            empty_text: "matrix.org"
+                            empty_text: "matrix.aios.pub"
                             draw_text: {
                                 text_style: <TITLE_TEXT>{font_size: 10.0}
                             }
@@ -298,13 +298,23 @@ live_design! {
 
 static MATRIX_SIGN_UP_URL: &str = "https://matrix.org/docs/chat_basics/matrix-for-im/#creating-a-matrix-account";
 
-#[derive(Live, LiveHook, Widget)]
+#[derive(Live, Widget)]
 pub struct LoginScreen {
     #[deref] view: View,
     /// Boolean to indicate if the SSO login process is still in flight
     #[rust] sso_pending: bool,
     /// The URL to redirect to after logging in with SSO.
     #[rust] sso_redirect_url: Option<String>,
+    /// Track if default values have been set
+    #[rust] defaults_set: bool,
+}
+
+impl LiveHook for LoginScreen {
+    fn after_new_from_doc(&mut self, _cx: &mut Cx) {
+        self.sso_pending = false;
+        self.sso_redirect_url = None;
+        self.defaults_set = false;
+    }
 }
 
 
@@ -315,6 +325,12 @@ impl Widget for LoginScreen {
     }
 
     fn draw_walk(&mut self, cx: &mut Cx2d, scope: &mut Scope, walk: Walk) -> DrawStep {
+        // Set default values on first draw
+        if !self.defaults_set {
+            self.view.text_input(ids!(user_id_input)).set_text(cx, "@amosli:aios.pub");
+            self.view.text_input(ids!(homeserver_input)).set_text(cx, "matrix.aios.pub");
+            self.defaults_set = true;
+        }
         self.view.draw_walk(cx, scope, walk)
     }
 }
@@ -364,7 +380,7 @@ impl MatchEvent for LoginScreen {
             login_status_modal.open(cx);
             self.redraw(cx);
         }
-        
+
         let provider_brands = ["apple", "facebook", "github", "gitlab", "google", "twitter"];
         let button_set: &[&[LiveId]] = ids_array!(
             apple_button, 

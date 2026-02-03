@@ -179,6 +179,10 @@ live_design! {
         }
     }
 
+    ChatButton = <NavigationTabButton> {
+        draw_icon: { svg_file: (ICON_CHAT) }
+    }
+
     HomeButton = <NavigationTabButton> {
         draw_icon: { svg_file: (ICON_HOME) }
         animator: { active = { default: on } }
@@ -227,6 +231,10 @@ live_design! {
             }
 
             <CachedWidget> {
+                chat_button = <ChatButton> {}
+            }
+
+            <CachedWidget> {
                 home_button = <HomeButton> {}
             }
 
@@ -257,6 +265,10 @@ live_design! {
             draw_bg: {
                 color: (COLOR_SECONDARY)
                 border_radius: 4.0
+            }
+
+            <CachedWidget> {
+                chat_button = <ChatButton> {}
             }
 
             <CachedWidget> {
@@ -422,14 +434,16 @@ impl Widget for NavigationTabBar {
         if let Event::Actions(actions) = event {
             // Handle one of the radio buttons being clicked (selected).
             let radio_button_set = self.view.radio_button_set(ids_array!(
+                chat_button,
                 home_button,
                 add_room_button,
                 settings_button,
             ));
             match radio_button_set.selected(cx, actions) {
-                Some(0) => cx.action(NavigationBarAction::GoToHome),
-                Some(1) => cx.action(NavigationBarAction::GoToAddRoom),
-                Some(2) => cx.action(NavigationBarAction::OpenSettings),
+                Some(0) => cx.action(NavigationBarAction::GoToChat),
+                Some(1) => cx.action(NavigationBarAction::GoToHome),
+                Some(2) => cx.action(NavigationBarAction::GoToAddRoom),
+                Some(3) => cx.action(NavigationBarAction::OpenSettings),
                 _ => { }
             }
 
@@ -443,6 +457,7 @@ impl Widget for NavigationTabBar {
                 // update our radio buttons accordingly.
                 if let Some(NavigationBarAction::TabSelected(tab)) = action.downcast_ref() {
                     match tab {
+                        SelectedTab::Chat => self.view.radio_button(ids!(chat_button)).select(cx, scope),
                         SelectedTab::Home     => self.view.radio_button(ids!(home_button)).select(cx, scope),
                         SelectedTab::AddRoom  => self.view.radio_button(ids!(add_room_button)).select(cx, scope),
                         SelectedTab::Settings => self.view.radio_button(ids!(settings_button)).select(cx, scope),
@@ -471,6 +486,7 @@ impl Widget for NavigationTabBar {
 pub enum SelectedTab {
     #[default]
     Home,
+    Chat,
     AddRoom,
     Settings,
     // AlertsInbox,
@@ -510,6 +526,8 @@ pub enum SelectedTab {
 pub enum NavigationBarAction {
     /// Go to the main rooms content view.
     GoToHome,
+    /// Go to the chat assistant view.
+    GoToChat,
     /// Go the add/join/explore room view.
     GoToAddRoom,
     /// Go to the Settings view (open the `SettingsScreen`).
