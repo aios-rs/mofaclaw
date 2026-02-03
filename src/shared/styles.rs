@@ -62,15 +62,15 @@ live_design! {
         font_size: (USERNAME_FONT_SIZE),
     }
 
-    pub COLOR_ROBRIX_PURPLE = #572DCC; // the purple color from the Robrix logo
-    pub COLOR_ROBRIX_CYAN = #05CDC7; // the cyan color from the Robrix logo
+    pub COLOR_ROBRIX_PURPLE = #3370FF;
+    pub COLOR_ROBRIX_CYAN = #3370FF;
 
-    pub TYPING_NOTICE_TEXT_COLOR = #121570
+    pub TYPING_NOTICE_TEXT_COLOR = #3370FF
 
     pub MESSAGE_FONT_SIZE = 11
-    pub MESSAGE_TEXT_COLOR = #x333
+    pub MESSAGE_TEXT_COLOR = #x1F2329
     // notices (automated messages from bots) use a lighter color
-    pub COLOR_MESSAGE_NOTICE_TEXT = #x888
+    pub COLOR_MESSAGE_NOTICE_TEXT = #x8F959E
     pub MESSAGE_TEXT_LINE_SPACING = 1.3
     // This font should only be used for plaintext labels. Don't use this for Html content,
     // as the Html widget sets different fonts for different text styles (e.g., bold, italic).
@@ -83,7 +83,7 @@ live_design! {
 
 
     pub SMALL_STATE_FONT_SIZE = 9.0
-    pub SMALL_STATE_TEXT_COLOR = #x888
+    pub SMALL_STATE_TEXT_COLOR = #x8F959E
     pub SMALL_STATE_TEXT_STYLE = <THEME_FONT_REGULAR>{
         font_size: (SMALL_STATE_FONT_SIZE),
     }
@@ -108,15 +108,15 @@ live_design! {
     pub COLOR_BG_DISABLED = #E0E0E0
     pub COLOR_WARNING_NOT_FOUND = #953800
 
-    pub COLOR_SELECT_TEXT = #A6CDFE
+    pub COLOR_SELECT_TEXT = #xE8F3FF
 
     pub COLOR_PRIMARY = #ffffff
     pub COLOR_PRIMARY_DARKER = #fefefe
     pub COLOR_SECONDARY = #E3E3E3
     pub COLOR_SECONDARY_DARKER = #C8C8C8
 
-    pub COLOR_ACTIVE_PRIMARY = #0f88fe
-    pub COLOR_ACTIVE_PRIMARY_DARKER = #106fcc
+    pub COLOR_ACTIVE_PRIMARY = #x3370FF
+    pub COLOR_ACTIVE_PRIMARY_DARKER = #x2960E0
 
     pub COLOR_LOCATION_PREVIEW_BG = #F0F5FF
 
@@ -130,7 +130,7 @@ live_design! {
 
 
     pub COLOR_TEXT_IDLE = #d8d8d8
-    pub COLOR_TEXT = #1C274C
+    pub COLOR_TEXT = #x1F2329
     pub COLOR_TEXT_INPUT_IDLE = #d8d8d8
 
     pub COLOR_TRANSPARENT = #00000000
@@ -303,10 +303,10 @@ pub const REDACTED_MESSAGE_FONT_SIZE: f32 = 10.0;
 
 /// #FFFFFF
 pub const COLOR_PRIMARY:               Vec4 = vec4(1.0, 1.0, 1.0, 1.0);
-/// #0F88FE
-pub const COLOR_ACTIVE_PRIMARY:        Vec4 = vec4(0.059, 0.533, 0.996, 1.0);
-/// #106FCC
-pub const COLOR_ACTIVE_PRIMARY_DARKER: Vec4 = vec4(0.063, 0.435, 0.682, 1.0);
+/// #3370FF
+pub const COLOR_ACTIVE_PRIMARY:        Vec4 = vec4(0.2, 0.439, 1.0, 1.0);
+/// #2960E0
+pub const COLOR_ACTIVE_PRIMARY_DARKER: Vec4 = vec4(0.161, 0.376, 0.878, 1.0);
 /// #138808
 pub const COLOR_FG_ACCEPT_GREEN:       Vec4 = vec4(0.074, 0.533, 0.031, 1.0);
 /// #F0FFF0
@@ -319,10 +319,10 @@ pub const COLOR_BG_DISABLED:           Vec4 = vec4(0.878, 0.878, 0.878, 1.0);
 pub const COLOR_FG_DANGER_RED:         Vec4 = vec4(0.863, 0.0, 0.02, 1.0);
 /// #FFF0F0
 pub const COLOR_BG_DANGER_RED:         Vec4 = vec4(1.0, 0.941, 0.941, 1.0);
-/// #572DCC
-pub const COLOR_ROBRIX_PURPLE:         Vec4 = vec4(0.341, 0.176, 0.8, 1.0);
-/// #05CDC7
-pub const COLOR_ROBRIX_CYAN:           Vec4 = vec4(0.031, 0.804, 0.78, 1.0);
+/// #3370FF
+pub const COLOR_ROBRIX_PURPLE:         Vec4 = vec4(0.2, 0.439, 1.0, 1.0);
+/// #3370FF
+pub const COLOR_ROBRIX_CYAN:           Vec4 = vec4(0.2, 0.439, 1.0, 1.0);
 /// #FF0000
 pub const COLOR_UNREAD_BADGE_MENTIONS: Vec4 = vec4(1.0, 0.0, 0.0, 1.0);
 /// #572DCC
@@ -333,8 +333,8 @@ pub const COLOR_UNREAD_BADGE_MESSAGES: Vec4 = vec4(0.667, 0.667, 0.667, 1.0);
 pub const COLOR_UNKNOWN_ROOM_AVATAR:   Vec4 = vec4(1.0, 0.431, 0.0, 1.0);
 /// #fcdb03
 pub const COLOR_WARNING_YELLOW:        Vec4 = vec4(0.988, 0.859, 0.01, 1.0);
-/// #0f88fe
-pub const COLOR_INFO_BLUE:             Vec4 = vec4(0.05, 0.53, 0.996, 1.0);
+/// #3370FF
+pub const COLOR_INFO_BLUE:             Vec4 = vec4(0.2, 0.439, 1.0, 1.0);
 /// #FFFFFF
 pub const COLOR_WHITE:                 Vec4 = vec4(1.0, 1.0, 1.0, 1.0);
 /// #888888
